@@ -58,14 +58,70 @@ function task03 () {
 // let cities = ["Rome", "Lviv", "Warsaw"];
 // Результат:
 // "Rome*Lviv*Warsaw"
+function task04 () {
+  let cities = ['Rome', 'Lviv', 'Warsaw']
+  console.log(cities.join('*'))
+}
 
-// 5. Використовуючи функцію prompt() задайте користувачу питання про досягнення ним повнолітнього віку. Результат запишіть в змінну isAdult. В залежності від отриманого значення виведіть відповідне повідомлення про статус особи. Наприклад: при виконанні умови вік більше 18 вивести “Ви досягли повнолітнього віку”. Якщо вік менше 18 років вивести “Ви ще надто молоді”,
+// 5. Використовуючи функцію prompt() задайте користувачу питання про досягнення ним повнолітнього віку.
+// Результат запишіть в змінну isAdult. В залежності від отриманого значення виведіть відповідне повідомлення про статус особи.
+// Наприклад: при виконанні умови вік більше 18 вивести “Ви досягли повнолітнього віку”. Якщо вік менше 18 років вивести “Ви ще надто молоді”,
+function task05 () {
+  let isAdult = parseInt(prompt('How old are you?'))
+  if (isAdult > 17) {
+    console.log('Ви досягли повнолітнього віку')
+  } else {
+    console.log('Ви ще надто молоді')
+  }
+}
 
 // 6. Користувач вводить три довжини сторін трикутника (використовуйте prompt () три рази для введення кожної сторони).
 // Необхідно
-// 	a) визначити і вивести в консоль площу трикутника
-// 	b) перевірити чи цей трикутник є прямокутним і вивести в консоль результат перевірки.
-// Здійснювати перевірку чи введені користувачем значення коректні, в іншому випадку вивести 'Incorrect data‘. Результат обчислення площі трикутника виводити в консоль з точністю 3 знаки після коми (наприклад:  8.42355465 =>  8.424).
+function task05 () {
+  const inputA = prompt("Enter side 'a':")
+  const inputB = prompt("Enter side 'b':")
+  // For check the program doing correctly
+  //   const inputC = Math.sqrt(a*a + b*b)
+  const inputC = prompt("Enter side 'c':")
+
+  // Здійснювати перевірку чи введені користувачем значення коректні, в іншому випадку вивести 'Incorrect data‘.
+  if (isNaN(inputA) || isNaN(inputB) || isNaN(inputC)) {
+    console.log('Incorrect data')
+    return
+  }
+
+  const a = parseFloat(inputA)
+  const b = parseFloat(inputB)
+  const c = parseFloat(inputC)
+
+  // 	a) визначити і вивести в консоль площу трикутника
+  // calc semi-perimeter
+  const sp = (a + b + c) / 2
+  // calc area
+  const area = Math.sqrt(sp * (sp - a) * (sp - b) * (sp - c))
+  // Результат обчислення площі трикутника виводити в консоль з точністю 3 знаки після коми (наприклад:  8.42355465 =>  8.424).
+  console.log(`Trianlge area = ${area.toFixed(3)}`)
+
+  // 	b) перевірити чи цей трикутник є прямокутним і вивести в консоль результат перевірки.
+  const hypotenuse = Math.max(a, b, c)
+  let otherSide = null
+  if (hypotenuse === a) {
+    otherSide = [b, c]
+  } else if (hypotenuse === b) {
+    otherSide = [a, c]
+  } else {
+    otherSide = [a, b]
+  }
+
+  const epsilon = 0.0001
+  const isRightTriangle =
+    Math.abs(
+      Math.pow(hypotenuse, 2) -
+        (Math.pow(otherSide[0], 2) + Math.pow(otherSide[1], 2))
+    ) < epsilon
+
+  console.log(`The Trianlge is ${isRightTriangle ? '' : 'not'} right triangle`)
+}
 
 // 7. Написати умовну конструкцію, яка в залежності від часу доби виводитиме відповідне привітання. Потрібно отримати реальний час доби із системи. Зробити 2 способами через 2 різних умовних оператора.
 // В діапазоні годин 23-5 – має виводитися привітання “Доброї ночі”
