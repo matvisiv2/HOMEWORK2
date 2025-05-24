@@ -132,8 +132,7 @@ function task06 () {
 // В діапазоні годин 11-17 – має виводитися привітання “Доброго дня”
 // В діапазоні годин 17-23 – має виводитися привітання “Доброго вечора”.
 function task07 () {
-    const now = new Date();
-    const hours = (now.getHours() % 24);
+    const hours = new Date().getHours();
 
     console.log(`The time is about = ${hours}:00`);
 
@@ -144,6 +143,30 @@ function task07 () {
     } else if (hours >= 5) {
         console.log('The hour is more than 05:00! Good morning!');
     } else {
-      console.log("The hour is more than 23:00! Good night!");
+        console.log('The hour is more than 23:00! Good night!');
+    }
+}
+
+function task07_2 () {
+    const hours = new Date().getHours();
+
+    console.log(`The time is about = ${hours}:00`);
+
+    switch (true) {
+        case 23 > hours && hours >= 17:
+            console.log('The hour is more than 17:00! Good evening!');
+            break;
+        case 17 > hours && hours >= 11:
+            console.log('The hour is more than 11:00! Good afternoon!');
+            break;
+        case 11 > hours && hours >= 5:
+            console.log('The hour is more than 05:00! Good morning!');
+            break;
+        case hours >= 23 || hours < 5:
+            console.log('The hour is more than 23:00! Good night!');
+            break;
+        default:
+            console.log('Strange hour...');
+            break;
     }
 }
